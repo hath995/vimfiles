@@ -22,6 +22,10 @@ Plugin 'terryma/vim-multiple-cursors'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'andviro/flake8-vim'
 Plugin 'davidhalter/jedi-vim'
+Plugin 'Shougo/vimproc.vim'
+Plugin 'Quramy/tsuquyomi'
+Plugin 'leafgarland/typescript-vim'
+Plugin 'vim-scripts/argtextobj.vim'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
