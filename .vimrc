@@ -19,6 +19,9 @@ Plugin 'osyo-manga/vim-over'
 Plugin 'marijnh/tern_for_vim'
 Plugin 'vim-scripts/argtextobj.vim'
 Plugin 'terryma/vim-multiple-cursors'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'andviro/flake8-vim'
+Plugin 'davidhalter/jedi-vim'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
@@ -39,7 +42,7 @@ set hlsearch
 set hidden
 set listchars=tab:▸\ ,eol:¬
 set list
-"colorscheme flattown
+colorscheme flattown
 set backspace=indent,eol,start
 set t_ut=
 set laststatus=2
