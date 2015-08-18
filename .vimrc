@@ -27,6 +27,7 @@ Plugin 'Quramy/tsuquyomi'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'sjl/gundo.vim'
 Plugin 'tpope/vim-fugitive'
+Plugin 'duff/vim-scratch'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
