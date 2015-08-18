@@ -25,6 +25,8 @@ Plugin 'davidhalter/jedi-vim'
 Plugin 'Shougo/vimproc.vim'
 Plugin 'Quramy/tsuquyomi'
 Plugin 'leafgarland/typescript-vim'
+Plugin 'sjl/gundo.vim'
+Plugin 'tpope/vim-fugitive'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
@@ -68,14 +70,16 @@ let g:PyFlakeMaxLineLength = 200
 let g:PyFlakeRangeCommand = 'Q'
 
 let g:over_enable_cmd_window = 1
+let g:airline#extensions#branch#enabled = 1
 
 map <C-n> :NERDTreeToggle<CR>
+nnoremap <leader>b :Gblame<cr>
+nnoremap <leader>u :GundoToggle<CR>
 map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
-noremap <C-TAB> :bnext<CR>
-noremap <S-C-TAB> :bprev<CR>
+
 function! ToggleForCopy()
     set list!
     set number!
