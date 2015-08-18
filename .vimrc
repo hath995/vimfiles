@@ -49,6 +49,9 @@ colorscheme flattown
 set backspace=indent,eol,start
 set t_ut=
 set laststatus=2
+set cursorline
+set colorcolumn=120
+highlight ColorColumn ctermbg=blue
 let g:multi_cursor_use_default_mapping=0
 
 let g:multi_cursor_next_key='<C-m>'
