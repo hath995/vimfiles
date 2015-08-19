@@ -28,6 +28,12 @@ Plugin 'leafgarland/typescript-vim'
 Plugin 'sjl/gundo.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'duff/vim-scratch'
+Plugin 'kana/vim-textobj-user'
+Plugin 'kana/vim-textobj-line'
+Plugin 'kana/vim-textobj-indent'
+Plugin 'bps/vim-textobj-python'
+Plugin 'nelstrom/vim-textobj-rubyblock'
+
 call vundle#end()            " required
 filetype plugin indent on    " required
 
