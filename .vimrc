@@ -34,6 +34,7 @@ Plugin 'kana/vim-textobj-line'
 Plugin 'kana/vim-textobj-indent'
 Plugin 'bps/vim-textobj-python'
 Plugin 'nelstrom/vim-textobj-rubyblock'
+Plugin 'jeetsukumaran/vim-buffergator'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -79,6 +80,10 @@ let g:PyFlakeRangeCommand = 'Q'
 
 let g:over_enable_cmd_window = 1
 let g:airline#extensions#branch#enabled = 1
+
+let g:buffergator_suppress_keymaps=1
+let g:buffergator_viewport_split_policy='T'
+nnoremap <leader>l :BuffergatorToggle<CR>
 
 map <C-n> :NERDTreeToggle<CR>
 nnoremap <leader>b :Gblame<cr>
