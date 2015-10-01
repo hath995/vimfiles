@@ -9,14 +9,14 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'bkad/CamelCaseMotion'
-Plugin 'blerins/flattown'
-Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'bling/vim-airline'
-Plugin 'tpope/vim-surround'
-Plugin 'osyo-manga/vim-over'
-Plugin 'marijnh/tern_for_vim'
+Plugin 'bkad/CamelCaseMotion'           " ,e takes you to the eb of camel cased words
+Plugin 'blerins/flattown'               " this is the color scheme
+Plugin 'scrooloose/nerdtree'            " file browser ctrl n (toggle) u - up dir, x - close, p - parent
+Plugin 'scrooloose/nerdcommenter'       " shift v, \ cc for bulk comment, \ cu
+Plugin 'bling/vim-airline'              " info status bar - current branch, file save stat, tpye, location, mode
+Plugin 'tpope/vim-surround'             " ysiw ' < surrounds word with quotes, iw - vim motion
+Plugin 'osyo-manga/vim-over'            " :OverCommandLine / - highlights regex matches
+Plugin 'marijnh/tern_for_vim'           " 
 Plugin 'vim-scripts/argtextobj.vim'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'kchmck/vim-coffee-script'
@@ -25,7 +25,7 @@ Plugin 'davidhalter/jedi-vim'
 Plugin 'Shougo/vimproc.vim'
 Plugin 'Quramy/tsuquyomi'
 Plugin 'leafgarland/typescript-vim'
-Plugin 'sjl/gundo.vim'
+Plugin 'sjl/gundo.vim'                  " \ u - opens vim change tracking tree
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'duff/vim-scratch'
