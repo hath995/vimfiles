@@ -35,6 +35,7 @@ Plugin 'kana/vim-textobj-indent'
 Plugin 'bps/vim-textobj-python'
 Plugin 'nelstrom/vim-textobj-rubyblock'
 Plugin 'jeetsukumaran/vim-buffergator'
+Plugin 'fsharp/vim-fsharp'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
