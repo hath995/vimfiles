@@ -109,3 +109,4 @@ function! ToggleForCopy()
     set relativenumber!
 endfunction
 nmap <silent> \p :call ToggleForCopy()<CR>
+au VimLeave * !echo -ne "\033[0m"
