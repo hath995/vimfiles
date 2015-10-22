@@ -63,6 +63,10 @@ set laststatus=2
 set cursorline
 set colorcolumn=120
 highlight ColorColumn ctermbg=blue
+set foldenable
+set fdm=indent
+set foldlevelstart=10
+
 let g:multi_cursor_use_default_mapping=0
 
 let g:multi_cursor_next_key='<C-m>'
@@ -92,6 +96,12 @@ map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
+tnoremap <Esc> <C-\><C-n>
+
+tnoremap <C-h> <C-\><C-n><C-w>h
+tnoremap <C-j> <C-\><C-n><C-w>j
+tnoremap <C-k> <C-\><C-n><C-w>k
+tnoremap <C-l> <C-\><C-n><C-w>l
 
 function! ToggleForCopy()
     set list!
