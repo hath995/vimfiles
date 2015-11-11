@@ -1,4 +1,4 @@
 ln -s ~/.vim/.vimrc ~/.vimrc
-mv .screenrc ~/.screenrc
+ln -s ~/.vim/.screenrc ~/.screenrc
 vim +PluginInstall +qall
 
