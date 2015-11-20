@@ -37,6 +37,7 @@ Plugin 'nelstrom/vim-textobj-rubyblock'
 Plugin 'jeetsukumaran/vim-buffergator'
 Plugin 'fsharp/vim-fsharp'
 Plugin 'easymotion/vim-easymotion.git'
+Plugin 'junegunn/vim-peekaboo'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
