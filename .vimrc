@@ -43,6 +43,7 @@ Plugin 'moll/vim-node'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
+call camelcasemotion#CreateMotionMappings(',')
 
 set omnifunc=syntaxcomplete#Complete
 let g:tern_show_signature_in_pum = 1
@@ -91,11 +92,14 @@ let g:airline#extensions#branch#enabled = 1
 
 let g:buffergator_suppress_keymaps=1
 let g:buffergator_viewport_split_policy='T'
+
+set undofile
+set undodir=~/.vim/undo
 nnoremap <leader>l :BuffergatorToggle<CR>
 
 map <C-n> :NERDTreeToggle<CR>
 nnoremap <leader>b :Gblame<cr>
-nnoremap <leader>u :GundoToggle<CR>
+nnoremap <leader>u :MundoToggle<CR>
 map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
