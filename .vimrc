@@ -34,6 +34,15 @@ Plugin 'kana/vim-textobj-line'
 Plugin 'kana/vim-textobj-indent'
 Plugin 'bps/vim-textobj-python'
 Plugin 'nelstrom/vim-textobj-rubyblock'
+Plugin 'jeetsukumaran/vim-buffergator'
+Plugin 'xolox/vim-misc'
+Plugin 'xolox/vim-easytags'
+Plugin 'majutsushi/tagbar'
+Plugin 'junegunn/vim-peekaboo'
+Plugin 'eagletmt/ghcmod-vim'
+Plugin 'Shougo/unite.vim'
+Plugin 'Shougo/neoyank.vim'
+Plugin 'airblade/vim-gitgutter'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -62,6 +71,8 @@ set laststatus=2
 set cursorline
 set colorcolumn=120
 highlight ColorColumn ctermbg=blue
+set tags+=.tags
+
 let g:multi_cursor_use_default_mapping=0
 
 let g:multi_cursor_next_key='<C-m>'
@@ -80,6 +91,14 @@ let g:PyFlakeRangeCommand = 'Q'
 let g:over_enable_cmd_window = 1
 let g:airline#extensions#branch#enabled = 1
 
+let g:buffergator_suppress_keymaps=1
+let g:buffergator_viewport_split_policy='T'
+nnoremap <leader>l :BuffergatorToggle<CR>
+
+let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
+execute "set rtp+=" . g:opamshare . "/merlin/vim"
+
+nmap <F8> :TagbarToggle<CR>
 map <C-n> :NERDTreeToggle<CR>
 nnoremap <leader>b :Gblame<cr>
 nnoremap <leader>u :GundoToggle<CR>
@@ -94,3 +113,109 @@ function! ToggleForCopy()
     set relativenumber!
 endfunction
 nmap <silent> \p :call ToggleForCopy()<CR>
+
+" -----------------------------------------------------
+" 4.2 Unite {{{
+" -----------------------------------------------------
+
+" Matcher settings
+call unite#filters#matcher_default#use(['matcher_fuzzy', 'matcher_hide_current_file'])
+call unite#filters#sorter_default#use(['sorter_rank'])
+
+" Custom profile
+call unite#custom#profile('default', 'context', {
+      \   'prompt': '» ',
+      \   'winheight': 15,
+      \ })
+
+" Add syntax highlighting
+let g:unite_source_line_enable_highlight=1
+
+" Dont override status line
+let g:unite_force_overwrite_statusline=0
+
+" Custom unite menus
+let g:unite_source_menu_menus = {}
+
+" Utils menu
+let g:unite_source_menu_menus.utils = {
+      \     'description' : 'Utility commands',
+      \ }
+let g:unite_source_menu_menus.utils.command_candidates = [
+      \       ['Run XMPFilter', 'Annotate'],
+      \       ['Format file', 'Format'],
+      \       ['Run file', 'Run'],
+      \       ['Generate Ctags', 'GenerateTags'],
+      \       ['Show notes', 'Notes'],
+      \     ]
+
+" Git menu
+let g:unite_source_menu_menus.git = {
+      \     'description' : 'Git commands',
+      \ }
+let g:unite_source_menu_menus.git.command_candidates = [
+      \       ['Stage hunk', 'GitGutterStageHunk'],
+      \       ['Unstage hunk', 'GitGutterRevertHunk'],
+      \       ['Stage', 'Gwrite'],
+      \       ['Status', 'Gstatus'],
+      \       ['Diff', 'Gvdiff'],
+      \       ['Commit', 'Gcommit --verbose'],
+      \       ['Revert', 'Gread'],
+      \       ['Log', 'Glog'],
+      \       ['Visual log', 'Gitv'],
+      \       ['Current file visual log', 'Gitv!'],
+      \     ]
+
+" Plug menu
+let g:unite_source_menu_menus.plug = {
+      \     'description' : 'Plugin management commands',
+      \ }
+let g:unite_source_menu_menus.plug.command_candidates = [
+      \       ['Install plugins', 'PlugInstall'],
+      \       ['Update plugins', 'PlugUpdate'],
+      \       ['Clean plugins', 'PlugClean'],
+      \       ['Upgrade vim-plug', 'PlugUpgrade'],
+      \     ]
+
+" My unite menu
+let g:unite_source_menu_menus.unite = {
+      \     'description' : 'My Unite sources',
+      \ }
+let g:unite_source_menu_menus.unite.command_candidates = [
+      \       ['Unite buffers', 'call utils#uniteBuffers()'],
+      \       ['Unite file browse', 'call utils#uniteFileBrowse()'],
+      \       ['Unite file search', 'call utils#uniteFileRec()'],
+      \       ['Unite history', 'call utils#uniteHistory()'],
+      \       ['Unite line search', 'call utils#uniteLineSearch()'],
+      \       ['Unite menu', 'call utils#uniteCustomMenu()'],
+      \       ['Unite registers', 'call utils#uniteRegisters()'],
+      \       ['Unite sources', 'call utils#uniteSources()'],
+      \       ['Unite windows', 'call utils#uniteWindows()'],
+      \       ['Unite yank history', 'call utils#uniteYankHistory()'],
+      \       ['Unite jump history', 'call utils#uniteJumps()'],
+      \     ]
+
+" Tag source settings
+let g:unite_source_tag_max_name_length=40
+let g:unite_source_tag_max_fname_length=50
+"}}}
+
+" -----------------------------------------------------
+" 5.1 Unite and extensions {{{
+" -----------------------------------------------------
+
+" Custom mappings for the unite buffer
+autocmd FileType unite call s:unite_settings()
+function! s:unite_settings()
+  " Enable navigation with control-j and control-k in insert mode
+  imap <silent> <buffer> <C-j> <Plug>(unite_select_next_line)
+  imap <silent> <buffer> <C-k> <Plug>(unite_select_previous_line)
+  " Runs 'splits' action by <C-s> and <C-v>
+  imap <silent> <buffer> <expr> <C-s> unite#do_action('split')
+  imap <silent> <buffer> <expr> <C-v> unite#do_action('vsplit')
+  " Exit with escape
+  nmap <silent> <buffer> <ESC> <Plug>(unite_exit)
+  " Mark candidates
+  vmap <silent> <buffer> m <Plug>(unite_toggle_mark_selected_candidates)
+  nmap <silent> <buffer> m <Plug>(unite_toggle_mark_current_candidate)
+endfunction
