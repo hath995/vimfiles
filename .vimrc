@@ -1,5 +1,6 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
+let g:python_host_prog="/Users/aaron/pluma/env/bin/python"
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -102,11 +103,16 @@ nmap <F8> :TagbarToggle<CR>
 map <C-n> :NERDTreeToggle<CR>
 nnoremap <leader>b :Gblame<cr>
 nnoremap <leader>u :GundoToggle<CR>
-map <C-h> <C-w>h
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-l> <C-w>l
+nmap <C-h> <C-w>h
+nmap <C-j> <C-w>j
+nmap <C-k> <C-w>k
+nmap <C-l> <C-w>l
+tnoremap <Esc> <C-\><C-n>
 
+tnoremap <C-h> <C-\><C-n><C-w>h
+tnoremap <C-j> <C-\><C-n><C-w>j
+tnoremap <C-k> <C-\><C-n><C-w>k
+tnoremap <C-l> <C-\><C-n><C-w>l
 function! ToggleForCopy()
     set list!
     set number!
