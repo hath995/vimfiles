@@ -25,7 +25,7 @@ Plugin 'davidhalter/jedi-vim'
 Plugin 'Shougo/vimproc.vim'
 Plugin 'Quramy/tsuquyomi'
 Plugin 'leafgarland/typescript-vim'
-Plugin 'sjl/gundo.vim'
+Plugin 'simnalamburt/vim-mundo.git'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'duff/vim-scratch'
@@ -43,10 +43,14 @@ Plugin 'eagletmt/ghcmod-vim'
 Plugin 'Shougo/unite.vim'
 Plugin 'Shougo/neoyank.vim'
 Plugin 'airblade/vim-gitgutter'
+Plugin 'fsharp/vim-fsharp'
+Plugin 'easymotion/vim-easymotion.git'
+Plugin 'moll/vim-node'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
 
+call camelcasemotion#CreateMotionMappings(',')
 
 set omnifunc=syntaxcomplete#Complete
 let g:tern_show_signature_in_pum = 1
@@ -72,6 +76,12 @@ set cursorline
 set colorcolumn=120
 highlight ColorColumn ctermbg=blue
 set tags+=.tags
+set foldenable
+set fdm=indent
+set foldlevelstart=10
+
+set undofile
+set undodir=~/.vim/undo
 
 let g:multi_cursor_use_default_mapping=0
 
@@ -93,19 +103,27 @@ let g:airline#extensions#branch#enabled = 1
 
 let g:buffergator_suppress_keymaps=1
 let g:buffergator_viewport_split_policy='T'
-nnoremap <leader>l :BuffergatorToggle<CR>
 
 let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
 execute "set rtp+=" . g:opamshare . "/merlin/vim"
 
 nmap <F8> :TagbarToggle<CR>
+
+nnoremap <leader>l :BuffergatorToggle<CR>
+
 map <C-n> :NERDTreeToggle<CR>
 nnoremap <leader>b :Gblame<cr>
-nnoremap <leader>u :GundoToggle<CR>
+nnoremap <leader>u :MundoToggle<CR>
 map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
+tnoremap <Esc> <C-\><C-n>
+
+tnoremap <C-h> <C-\><C-n><C-w>h
+tnoremap <C-j> <C-\><C-n><C-w>j
+tnoremap <C-k> <C-\><C-n><C-w>k
+tnoremap <C-l> <C-\><C-n><C-w>l
 
 function! ToggleForCopy()
     set list!
@@ -219,3 +237,5 @@ function! s:unite_settings()
   vmap <silent> <buffer> m <Plug>(unite_toggle_mark_selected_candidates)
   nmap <silent> <buffer> m <Plug>(unite_toggle_mark_current_candidate)
 endfunction
+
+au VimLeave * !echo -ne "\033[0m"

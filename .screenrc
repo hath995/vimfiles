@@ -1,0 +1,26 @@
+shell -$SHELL
+term xterm-256color
+termcapinfo xterm-256color* ti@:te@
+#termcapinfo xterm 'hs:ts=\E]2;:fs=07:ds=\E]2;screen07'
+# the following two lines give a two-line status, with the current window highlighted
+hardstatus off
+hardstatus alwayslastline
+hardstatus string '%{= kG}[%{G}%H%? %1`%?%{g}][%= %{= kw}%-w%{+b yk} %n*%t%?(%u)%? %{-}%+w %=%{g}][%{B}%m/%d %{W}%C%A%{g}]'
+
+# huge scrollback buffer
+defscrollback 10000
+
+# no welcome message
+startup_message off
+
+# mouse tracking allows to switch region focus by clicking
+#mousetrack on
+
+# get rid of silly xoff stuff
+bind s split
+
+# navigating regions with Ctrl-arrows
+bindkey "^[[1;5D" focus left
+bindkey "^[[1;5C" focus right
+bindkey "^[[1;5A" focus up
+bindkey "^[[1;5B" focus down
