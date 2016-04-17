@@ -55,6 +55,7 @@ call camelcasemotion#CreateMotionMappings(',')
 set omnifunc=syntaxcomplete#Complete
 let g:tern_show_signature_in_pum = 1
 let g:tern_show_argument_hints = 'on_hold'
+let NERDTreeIgnore = ['\.pyc$']
 set completeopt-=preview
 autocmd FileType javascript map <buffer> gd :TernDef<CR>
 
@@ -104,8 +105,8 @@ let g:airline#extensions#branch#enabled = 1
 let g:buffergator_suppress_keymaps=1
 let g:buffergator_viewport_split_policy='T'
 
-let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
-execute "set rtp+=" . g:opamshare . "/merlin/vim"
+" let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
+" execute 'set rtp+=' . g:opamshare . '/merlin/vim'
 
 nmap <F8> :TagbarToggle<CR>
 
@@ -237,5 +238,32 @@ function! s:unite_settings()
   vmap <silent> <buffer> m <Plug>(unite_toggle_mark_selected_candidates)
   nmap <silent> <buffer> m <Plug>(unite_toggle_mark_current_candidate)
 endfunction
-
+" Search files recursively ([o]pen file)
+ nnoremap <silent> <leader>o  :execute 'Unite -buffer-name=file-recursive-search -start-insert file_rec/neovim'<CR>
+" " Browse [f]iles in CWD
+ nnoremap <silent> <leader>f :execute 'Unite -buffer-name=project-files -start-insert file'<CR>
+" " [U]nite sources
+" nnoremap <silent> <leader>u :call utils#uniteSources()<CR>
+" " Search between open files - buffers
+ nnoremap <silent> <leader>k :execute 'Unite -buffer-name=buffers -start-insert buffer'<CR>
+" " Search in current file ou[t]line (tags in current file)
+" nnoremap <silent> <leader>t :call utils#uniteTags()<CR>
+" " Search in lines on current buffer
+ nnoremap <silent> <leader>/ :execute 'Unite -buffer-name=line-search -start-insert line'<CR>
+" " Search in [y]ank history
+ nnoremap <silent> <leader>y :execute 'Unite -buffer-name=yank-history history/yank'<CR>
+" " Search in [r]egisters
+ nnoremap <silent> <leader>r :execute 'Unite -buffer-name=registers register'<CR>
+" " Search in opened [w]indow splits
+ nnoremap <silent> <leader>w :execute 'Unite -buffer-name=splits window'<CR>
+" " Search in latest [j]ump positions
+ nnoremap <silent> <leader>j :execute 'Unite -buffer-name=jumps -start-insert jump'<CR>
+" " Search in file for text with [g]rep
+ nnoremap <silent> <C-p> :execute 'Unite -buffer-name=grep -start-insert grep'<CR>
+" " Search in my custom unite [m]enu with my commands
+ nnoremap <silent> <leader>m :execute 'Unite -buffer-name=menu -start-insert menu'<CR>
+" " Seach in help menu for commands
+ nnoremap <silent> <leader>hc :execute 'Unite -buffer-name=commands -start-insert command'<CR>
+" " Seach in help menu for mappings
+ nnoremap <silent> <leader>hm :execute 'Unite -buffer-name=mappings -start-insert mapping'<CR>
 au VimLeave * !echo -ne "\033[0m"
