@@ -1,6 +1,9 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
+" -----------------------------------------------------
+" Vundle plugin setup
+" -----------------------------------------------------
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -9,106 +12,144 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'bkad/CamelCaseMotion'
-Plugin 'blerins/flattown'
-Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'bling/vim-airline'
-Plugin 'tpope/vim-surround'
-Plugin 'osyo-manga/vim-over'
-Plugin 'marijnh/tern_for_vim'
-Plugin 'vim-scripts/argtextobj.vim'
-Plugin 'terryma/vim-multiple-cursors'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'andviro/flake8-vim'
-Plugin 'davidhalter/jedi-vim'
-Plugin 'Shougo/vimproc.vim'
-Plugin 'Quramy/tsuquyomi'
-Plugin 'leafgarland/typescript-vim'
-Plugin 'simnalamburt/vim-mundo.git'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-unimpaired'
-Plugin 'duff/vim-scratch'
-Plugin 'kana/vim-textobj-user'
-Plugin 'kana/vim-textobj-line'
-Plugin 'kana/vim-textobj-indent'
-Plugin 'bps/vim-textobj-python'
-Plugin 'nelstrom/vim-textobj-rubyblock'
-Plugin 'jeetsukumaran/vim-buffergator'
-Plugin 'xolox/vim-misc'
-Plugin 'xolox/vim-easytags'
-Plugin 'majutsushi/tagbar'
-Plugin 'junegunn/vim-peekaboo'
-Plugin 'eagletmt/ghcmod-vim'
-Plugin 'Shougo/unite.vim'
-Plugin 'Shougo/neoyank.vim'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'fsharp/vim-fsharp'
-Plugin 'easymotion/vim-easymotion.git'
-Plugin 'moll/vim-node'
-Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'bkad/CamelCaseMotion'           " Adds motion for camelcase or snakecase names
+Plugin 'blerins/flattown'               " Color scheme
+Plugin 'scrooloose/nerdtree'            " File tree graphical browser
+Plugin 'scrooloose/nerdcommenter'       " Language aware comment hotkeys
+Plugin 'bling/vim-airline'              " Nice looking status line
+Plugin 'tpope/vim-surround'             " Easily manipulate paired delimiters
+Plugin 'osyo-manga/vim-over'            " Fancy Regular expression matching and highlighting
+Plugin 'marijnh/tern_for_vim'           " Javascript type and autocompletion library
+Plugin 'vim-scripts/argtextobj.vim'     " Text object for function arguments
+Plugin 'terryma/vim-multiple-cursors'   " Sublime Textlike Multi-cursor plugin
+Plugin 'kchmck/vim-coffee-script'       " Coffeescript syntax highlighting
+Plugin 'andviro/flake8-vim'             " Python linting tool
+Plugin 'davidhalter/jedi-vim'           " Python autocompletion and refactoring tools
+Plugin 'Shougo/vimproc.vim'             " Dependency of many Shougo plugins
+Plugin 'Quramy/tsuquyomi'               " Typescript autocompletion framework
+Plugin 'leafgarland/typescript-vim'     " Typescript syntax highlighting
+Plugin 'simnalamburt/vim-mundo.git'     " Visual graph of file change history
+Plugin 'tpope/vim-fugitive'             " Git integration
+Plugin 'tpope/vim-unimpaired'           " Various convient mappings
+Plugin 'duff/vim-scratch'               " Easy scratch buffer
+Plugin 'kana/vim-textobj-user'          " Kana's text object framework
+Plugin 'kana/vim-textobj-line'          " Adds line text object
+Plugin 'kana/vim-textobj-indent'        " Adds indent text object
+Plugin 'bps/vim-textobj-python'         " Adds python text object
+Plugin 'nelstrom/vim-textobj-rubyblock' " Adds ruby text object
+Plugin 'jeetsukumaran/vim-buffergator' " Quick buffer switch
+Plugin 'xolox/vim-misc'                " Dependency of vim-easytags
+Plugin 'xolox/vim-easytags'            " Ctags
+Plugin 'majutsushi/tagbar'             " Graphical ctag navigator
+Plugin 'junegunn/vim-peekaboo'         " Shows register contents on register action
+Plugin 'eagletmt/ghcmod-vim'           " Haskell syntax and autocomplete
+Plugin 'Shougo/unite.vim'              " Unified quick searching system
+Plugin 'Shougo/neoyank.vim'            " Yank buffer history
+Plugin 'airblade/vim-gitgutter'        " Git diff highlighting
+Plugin 'fsharp/vim-fsharp'             " F# tools
+Plugin 'easymotion/vim-easymotion.git' " Powerful quick motion command
+Plugin 'moll/vim-node'                 " Nodejs integration
+Plugin 'nathanaelkane/vim-indent-guides' " Visual guide to indentation
 
 call vundle#end()            " required
 filetype plugin indent on    " required
 
-call camelcasemotion#CreateMotionMappings(',')
-let NERDTreeIgnore = ['\.pyc$']
-
+" -----------------------------------------------------
+" Vim builtin configuration settings
+" -----------------------------------------------------
+" Autocompletion settings
 set omnifunc=syntaxcomplete#Complete
-let g:tern_show_signature_in_pum = 1
-let g:tern_show_argument_hints = 'on_hold'
 set completeopt-=preview
-autocmd FileType javascript map <buffer> gd :TernDef<CR>
-
+" Syntax highlighting on
 syntax on
+" Show line numbers and motion line numbers
 set number
 set relativenumber
+" Uses spaces instead of hard tabs
 set expandtab
+" Set tab width to default to 4 spaces
 set tabstop=4
 set shiftwidth=4
+" Highlight terms searched with /
 set hlsearch
+" Allow buffers 
 set hidden
+" Show white space characters
 set listchars=tab:▸\ ,eol:¬
 set list
+" Colors!
 colorscheme flattown
+" Sane defaults for insert mode backspace behavior
 set backspace=indent,eol,start
+" Solves color issue with background in GNU Screen
 set t_ut=
+" Always on status bar
 set laststatus=2
+" Highlight the line cursor is
 set cursorline
+" Highlight line length limit
 set colorcolumn=120
 highlight ColorColumn ctermbg=blue
+" Ctag definition file
 set tags+=.tags
+" Code folding settings
 set foldenable
 set fdm=indent
 set foldlevelstart=10
-
+" Undofile saves edits across vim sessions
 set undofile
 set undodir=~/.vim/undo
 
-let g:multi_cursor_use_default_mapping=0
+" -----------------------------------------------------
+" Plugin variable
+" -----------------------------------------------------
+" Javascript autocompletion plugin settings
+let g:tern_show_signature_in_pum = 1
+let g:tern_show_argument_hints = 'on_hold'
+autocmd FileType javascript map <buffer> gd :TernDef<CR>
 
+" NerdTree ignores certain filetypes
+let NERDTreeIgnore = ['\.pyc$']
+
+" Sublime Text like multicursor settings
+let g:multi_cursor_use_default_mapping=0
 let g:multi_cursor_next_key='<C-m>'
 let g:multi_cursor_prev_key='<C-p>'
 let g:multi_cursor_skip_key='<C-x>'
 let g:multi_cursor_quit_key='<Esc>'
 
+" Python autocompletion plugin settings
 let g:jedi#use_tabs_not_buffers = 0
 let g:jedi#use_splits_not_buffers = "left"
 let g:jedi#show_call_signatures=1
 
+" Python lint plugin settings
 let g:PyFlakeOnWrite = 1
-let g:PyFlakeMaxLineLength = 200
+let g:PyFlakeMaxLineLength = 120
 let g:PyFlakeRangeCommand = 'Q'
 
+" Airline plugin settings
 let g:over_enable_cmd_window = 1
 let g:airline#extensions#branch#enabled = 1
 
+" Buffergator plugin settings
 let g:buffergator_suppress_keymaps=1
 let g:buffergator_viewport_split_policy='T'
 
-let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
-execute "set rtp+=" . g:opamshare . "/merlin/vim"
+" Indent guide setup
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_auto_colors = 0
+let g:indent_guides_guide_size = 1
+let g:indent_guides_start_level = 2
+let g:indent_guides_exclude_filetypes = ['help', 'nerdtree']
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=237
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=239
 
+" Ocaml autocompletion plugin setup (Merlin)
+" let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
+" execute 'set rtp+=' . g:opamshare . '/merlin/vim'
+
+call camelcasemotion#CreateMotionMappings(',')
 nmap <F8> :TagbarToggle<CR>
 
 nnoremap <leader>l :BuffergatorToggle<CR>
@@ -116,10 +157,13 @@ nnoremap <leader>l :BuffergatorToggle<CR>
 map <C-n> :NERDTreeToggle<CR>
 nnoremap <leader>b :Gblame<cr>
 nnoremap <leader>u :MundoToggle<CR>
+
+" Quick window motion mappings
 map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
+" Neovim terminal mappings
 tnoremap <Esc> <C-\><C-n>
 
 tnoremap <C-h> <C-\><C-n><C-w>h
@@ -127,6 +171,7 @@ tnoremap <C-j> <C-\><C-n><C-w>j
 tnoremap <C-k> <C-\><C-n><C-w>k
 tnoremap <C-l> <C-\><C-n><C-w>l
 
+" Remove line number information for old vim copy and paste
 function! ToggleForCopy()
     set list!
     set number!
@@ -135,7 +180,7 @@ endfunction
 nmap <silent> \p :call ToggleForCopy()<CR>
 
 " -----------------------------------------------------
-" 4.2 Unite {{{
+" Unite Configuration
 " -----------------------------------------------------
 
 " Matcher settings
@@ -156,18 +201,6 @@ let g:unite_force_overwrite_statusline=0
 
 " Custom unite menus
 let g:unite_source_menu_menus = {}
-
-" Utils menu
-let g:unite_source_menu_menus.utils = {
-      \     'description' : 'Utility commands',
-      \ }
-let g:unite_source_menu_menus.utils.command_candidates = [
-      \       ['Run XMPFilter', 'Annotate'],
-      \       ['Format file', 'Format'],
-      \       ['Run file', 'Run'],
-      \       ['Generate Ctags', 'GenerateTags'],
-      \       ['Show notes', 'Notes'],
-      \     ]
 
 " Git menu
 let g:unite_source_menu_menus.git = {
@@ -197,31 +230,13 @@ let g:unite_source_menu_menus.plug.command_candidates = [
       \       ['Upgrade vim-plug', 'PlugUpgrade'],
       \     ]
 
-" My unite menu
-let g:unite_source_menu_menus.unite = {
-      \     'description' : 'My Unite sources',
-      \ }
-let g:unite_source_menu_menus.unite.command_candidates = [
-      \       ['Unite buffers', 'call utils#uniteBuffers()'],
-      \       ['Unite file browse', 'call utils#uniteFileBrowse()'],
-      \       ['Unite file search', 'call utils#uniteFileRec()'],
-      \       ['Unite history', 'call utils#uniteHistory()'],
-      \       ['Unite line search', 'call utils#uniteLineSearch()'],
-      \       ['Unite menu', 'call utils#uniteCustomMenu()'],
-      \       ['Unite registers', 'call utils#uniteRegisters()'],
-      \       ['Unite sources', 'call utils#uniteSources()'],
-      \       ['Unite windows', 'call utils#uniteWindows()'],
-      \       ['Unite yank history', 'call utils#uniteYankHistory()'],
-      \       ['Unite jump history', 'call utils#uniteJumps()'],
-      \     ]
-
 " Tag source settings
 let g:unite_source_tag_max_name_length=40
 let g:unite_source_tag_max_fname_length=50
 "}}}
 
 " -----------------------------------------------------
-" 5.1 Unite and extensions {{{
+" Unite Mappings
 " -----------------------------------------------------
 
 " Custom mappings for the unite buffer
@@ -239,14 +254,39 @@ function! s:unite_settings()
   vmap <silent> <buffer> m <Plug>(unite_toggle_mark_selected_candidates)
   nmap <silent> <buffer> m <Plug>(unite_toggle_mark_current_candidate)
 endfunction
+" Search files recursively ([o]pen file)
+ nnoremap <silent> <leader>o  :execute 'Unite -buffer-name=file-recursive-search -start-insert file_rec/neovim'<CR>
+" " Browse [f]iles in CWD
+ nnoremap <silent> <leader>f :execute 'Unite -buffer-name=project-files -start-insert file'<CR>
+" " [U]nite sources
+" nnoremap <silent> <leader>u :call utils#uniteSources()<CR>
+" " Search between open files - buffers
+ nnoremap <silent> <leader>k :execute 'Unite -buffer-name=buffers -start-insert buffer'<CR>
+" " Search in current file ou[t]line (tags in current file)
+" nnoremap <silent> <leader>t :call utils#uniteTags()<CR>
+" " Search in lines on current buffer
+ nnoremap <silent> <leader>/ :execute 'Unite -buffer-name=line-search -start-insert line'<CR>
+" " Search in [y]ank history
+ nnoremap <silent> <leader>y :execute 'Unite -buffer-name=yank-history history/yank'<CR>
+" " Search in [r]egisters
+ nnoremap <silent> <leader>r :execute 'Unite -buffer-name=registers register'<CR>
+" " Search in opened [w]indow splits
+ nnoremap <silent> <leader>w :execute 'Unite -buffer-name=splits window'<CR>
+" " Search in latest [j]ump positions
+ nnoremap <silent> <leader>j :execute 'Unite -buffer-name=jumps -start-insert jump'<CR>
+" " Search in file for text with [g]rep
+ nnoremap <silent> <C-p> :execute 'Unite -buffer-name=grep -start-insert grep'<CR>
+" " Search in my custom unite [m]enu with my commands
+ nnoremap <silent> <leader>m :execute 'Unite -buffer-name=menu -start-insert menu'<CR>
+" " Seach in help menu for commands
+ nnoremap <silent> <leader>hc :execute 'Unite -buffer-name=commands -start-insert command'<CR>
+" " Seach in help menu for mappings
+ nnoremap <silent> <leader>hm :execute 'Unite -buffer-name=mappings -start-insert mapping'<CR>
+"}}}
 
-let g:indent_guides_enable_on_vim_startup = 1
-let g:indent_guides_auto_colors = 0
-let g:indent_guides_guide_size = 1
-let g:indent_guides_start_level = 2
-let g:indent_guides_exclude_filetypes = ['help', 'nerdtree']
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=237
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=239
 
 
+" -----------------------------------------------------
+" On vim exit
+" -----------------------------------------------------
 au VimLeave * !echo -ne "\033[0m"
