@@ -46,11 +46,13 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'fsharp/vim-fsharp'
 Plugin 'easymotion/vim-easymotion.git'
 Plugin 'moll/vim-node'
+Plugin 'nathanaelkane/vim-indent-guides'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
 
 call camelcasemotion#CreateMotionMappings(',')
+let NERDTreeIgnore = ['\.pyc$']
 
 set omnifunc=syntaxcomplete#Complete
 let g:tern_show_signature_in_pum = 1
@@ -237,5 +239,14 @@ function! s:unite_settings()
   vmap <silent> <buffer> m <Plug>(unite_toggle_mark_selected_candidates)
   nmap <silent> <buffer> m <Plug>(unite_toggle_mark_current_candidate)
 endfunction
+
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_auto_colors = 0
+let g:indent_guides_guide_size = 1
+let g:indent_guides_start_level = 2
+let g:indent_guides_exclude_filetypes = ['help', 'nerdtree']
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=237
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=239
+
 
 au VimLeave * !echo -ne "\033[0m"
