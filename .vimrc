@@ -163,13 +163,13 @@ map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
-" Neovim terminal mappings
-tnoremap <Esc> <C-\><C-n>
+" Neovim terminal mappings (re-enable for neovim)
+"tnoremap <Esc> <C-\><C-n>
 
-tnoremap <C-h> <C-\><C-n><C-w>h
-tnoremap <C-j> <C-\><C-n><C-w>j
-tnoremap <C-k> <C-\><C-n><C-w>k
-tnoremap <C-l> <C-\><C-n><C-w>l
+"tnoremap <C-h> <C-\><C-n><C-w>h
+"tnoremap <C-j> <C-\><C-n><C-w>j
+"tnoremap <C-k> <C-\><C-n><C-w>k
+"tnoremap <C-l> <C-\><C-n><C-w>l
 
 " Remove line number information for old vim copy and paste
 function! ToggleForCopy()
