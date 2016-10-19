@@ -1,6 +1,6 @@
 " .vimrc
 
-source bundlerc.vim
+source ~/.vim/bundlerc.vim
 
 " -----------------------------------------------------
 " Vim builtin configuration settings
