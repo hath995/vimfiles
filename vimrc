@@ -204,6 +204,8 @@ function! s:unite_settings()
 endfunction
 " Search files recursively ([o]pen file)
  nnoremap <silent> <leader>o  :execute 'Unite -buffer-name=file-recursive-search -start-insert file_rec/neovim'<CR>
+" Search files recursively ([O]pen file)
+ nnoremap <silent> <leader>O  :execute 'Unite -buffer-name=file-recursive-search -start-insert file_rec/async'<CR>
 " " Browse [f]iles in CWD
  nnoremap <silent> <leader>f :execute 'Unite -buffer-name=project-files -start-insert file'<CR>
 " " [U]nite sources
@@ -230,6 +232,9 @@ endfunction
  nnoremap <silent> <leader>hc :execute 'Unite -buffer-name=commands -start-insert command'<CR>
 " " Seach in help menu for mappings
  nnoremap <silent> <leader>hm :execute 'Unite -buffer-name=mappings -start-insert mapping'<CR>
+" " Search for pattern in open buffers
+ nnoremap <silent><leader>a :execute 'Unite -buffer-name=grep_all_buffers  -start-insert grep:$buffers::'<CR>
+
 "}}}
 
 
