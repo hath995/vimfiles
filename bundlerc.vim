@@ -50,6 +50,10 @@ Plugin 'fsharp/vim-fsharp'             " F# tools
 Plugin 'easymotion/vim-easymotion.git' " Powerful quick motion command
 Plugin 'moll/vim-node'                 " Nodejs integration
 Plugin 'nathanaelkane/vim-indent-guides' " Visual guide to indentation
+Plugin 'kien/rainbow_parentheses.vim'  "Colors parentheses for easier nesting
+Plugin 'editorconfig/editorconfig-vim' "Vim will follow editor config files
+Plugin 'vim-ruby/vim-ruby'             "Add niceer ruby suport
+
 
 call vundle#end()            " required
 filetype plugin indent on    " required
