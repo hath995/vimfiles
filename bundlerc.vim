@@ -37,7 +37,6 @@ Plugin 'kana/vim-textobj-line'          " Adds line text object
 Plugin 'kana/vim-textobj-indent'        " Adds indent text object
 Plugin 'bps/vim-textobj-python'         " Adds python text object
 Plugin 'nelstrom/vim-textobj-rubyblock' " Adds ruby text object
-Plugin 'jeetsukumaran/vim-buffergator' " Quick buffer switch
 "Plugin 'xolox/vim-misc'                " Dependency of vim-easytags
 "Plugin 'xolox/vim-easytags'            " Ctags
 Plugin 'majutsushi/tagbar'             " Graphical ctag navigator
