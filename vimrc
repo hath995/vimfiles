@@ -80,10 +80,6 @@ let g:PyFlakeRangeCommand = 'Q'
 let g:over_enable_cmd_window = 1
 let g:airline#extensions#branch#enabled = 1
 
-" Buffergator plugin settings
-let g:buffergator_suppress_keymaps=1
-let g:buffergator_viewport_split_policy='T'
-
 " Indent guide setup
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_auto_colors = 0
@@ -211,7 +207,7 @@ endfunction
 " " [U]nite sources
 " nnoremap <silent> <leader>u :call utils#uniteSources()<CR>
 " " Search between open files - buffers
- nnoremap <silent> <leader>k :execute 'Unite -buffer-name=buffers -start-insert buffer'<CR>
+ nnoremap <silent> <leader>l :execute 'Unite -buffer-name=buffers -start-insert buffer'<CR>
 " " Search in current file ou[t]line (tags in current file)
 " nnoremap <silent> <leader>t :call utils#uniteTags()<CR>
 " " Search in lines on current buffer
