@@ -131,6 +131,12 @@ nmap <silent> \p :call ToggleForCopy()<CR>
 call unite#filters#matcher_default#use(['matcher_fuzzy', 'matcher_hide_current_file'])
 call unite#filters#sorter_default#use(['sorter_rank'])
 
+" File sources should ignore globs
+call unite#custom#source('file,file_rec,file_rec/async,file_rec/neovim', 'ignore_pattern', 'bundle\|node_modules\|bower_components\|\.git\|\.hg\|\.svn\|\.hg')
+
+" File sources should only use project files
+call unite#custom#source('file,file_rec,file_rec/async,file_rec/neovim', 'matchers', ['matcher_project_ignore_files', 'converter_relative_word', 'matcher_fuzzy'])
+
 " Custom profile
 call unite#custom#profile('default', 'context', {
       \   'prompt': '» ',
