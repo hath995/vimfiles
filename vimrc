@@ -96,8 +96,6 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=239
 call camelcasemotion#CreateMotionMappings(',')
 nmap <F8> :TagbarToggle<CR>
 
-nnoremap <leader>l :BuffergatorToggle<CR>
-
 map <C-n> :NERDTreeToggle<CR>
 nnoremap <leader>b :Gblame<cr>
 nnoremap <leader>u :MundoToggle<CR>
