@@ -37,9 +37,9 @@ Plugin 'kana/vim-textobj-line'          " Adds line text object
 Plugin 'kana/vim-textobj-indent'        " Adds indent text object
 Plugin 'bps/vim-textobj-python'         " Adds python text object
 Plugin 'nelstrom/vim-textobj-rubyblock' " Adds ruby text object
-Plugin 'jeetsukumaran/vim-buffergator' " Quick buffer switch
-Plugin 'xolox/vim-misc'                " Dependency of vim-easytags
-Plugin 'xolox/vim-easytags'            " Ctags
+"Plugin 'jeetsukumaran/vim-buffergator' " Quick buffer switch
+"Plugin 'xolox/vim-misc'                " Dependency of vim-easytags
+"Plugin 'xolox/vim-easytags'            " Ctags
 Plugin 'majutsushi/tagbar'             " Graphical ctag navigator
 Plugin 'junegunn/vim-peekaboo'         " Shows register contents on register action
 Plugin 'eagletmt/ghcmod-vim'           " Haskell syntax and autocomplete
@@ -50,6 +50,22 @@ Plugin 'fsharp/vim-fsharp'             " F# tools
 Plugin 'easymotion/vim-easymotion.git' " Powerful quick motion command
 Plugin 'moll/vim-node'                 " Nodejs integration
 Plugin 'nathanaelkane/vim-indent-guides' " Visual guide to indentation
+Plugin 'ujihisa/unite-haskellimport.git' " Unite haskell import source
+Plugin 'derekwyatt/vim-scala'
+Plugin 'ensime/ensime-vim'
+Plugin 'kien/rainbow_parentheses.vim'
+Plugin 'mbbill/undotree'
+Plugin 'chrisbra/histwin.vim'
+Plugin 'floobits/floobits-neovim'
+Plugin 'editorconfig/editorconfig-vim'
+Plugin 'vim-ruby/vim-ruby'
+Plugin 'raichoo/purescript-vim.git'
+Plugin 'vim-syntastic/syntastic.git'
+Plugin 'hath995/potion'
+Plugin 'hath995/egg'
+Plugin 'FrigoEU/psc-ide-vim.git'
+Plugin 'jdonaldson/vaxe.git'
+Plugin 'ngmy/vim-rubocop.git'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -99,6 +115,7 @@ set foldlevelstart=10
 " Undofile saves edits across vim sessions
 set undofile
 set undodir=~/.vim/undo
+set path+=**
 
 " -----------------------------------------------------
 " Plugin variable
@@ -131,6 +148,7 @@ let g:PyFlakeRangeCommand = 'Q'
 " Airline plugin settings
 let g:over_enable_cmd_window = 1
 let g:airline#extensions#branch#enabled = 1
+let g:gitgutter_async = 0
 
 " Buffergator plugin settings
 let g:buffergator_suppress_keymaps=1
@@ -145,14 +163,37 @@ let g:indent_guides_exclude_filetypes = ['help', 'nerdtree']
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=237
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=239
 
+autocmd BufWritePost *.scala silent :EnTypeCheck
+let g:rbpt_colorpairs = [
+    \ ['red',         'RoyalBlue3'],
+    \ ['brown',       'SeaGreen3'],
+    \ ['blue',        'DarkOrchid3'],
+    \ ['gray',        'firebrick3'],
+    \ ['green',       'RoyalBlue3'],
+    \ ['magenta',     'SeaGreen3'],
+    \ ['cyan',        'DarkOrchid3'],
+    \ ['darkred',     'firebrick3'],
+    \ ['brown',       'RoyalBlue3'],
+    \ ['darkblue',    'DarkOrchid3'],
+    \ ['gray',        'firebrick3'],
+    \ ['darkgreen',   'RoyalBlue3'],
+    \ ['darkmagenta', 'SeaGreen3'],
+    \ ['darkcyan',    'DarkOrchid3'],
+    \ ['red',         'firebrick3'],
+    \ ]
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
 " Ocaml autocompletion plugin setup (Merlin)
 " let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
 " execute 'set rtp+=' . g:opamshare . '/merlin/vim'
+let g:psc_ide_syntastic_mode = 2
 
 call camelcasemotion#CreateMotionMappings(',')
 nmap <F8> :TagbarToggle<CR>
 
-nnoremap <leader>l :BuffergatorToggle<CR>
+"nnoremap <leader>l :BuffergatorToggle<CR>
 
 map <C-n> :NERDTreeToggle<CR>
 nnoremap <leader>b :Gblame<cr>
@@ -192,6 +233,11 @@ call unite#custom#profile('default', 'context', {
       \   'prompt': '» ',
       \   'winheight': 15,
       \ })
+" File sources should ignore globs
+call unite#custom#source('file,file_rec,file_rec/async,file_rec/neovim', 'ignore_pattern', '\.chef\|chef\/\(vendor\|jobs\)\|bundle\|node_modules\|bower_components\|\.git\|\.hg\|\.svn\|\.hg')
+
+" File sources should only use project files
+call unite#custom#source('file,file_rec,file_rec/async,file_rec/neovim', 'matchers', ['matcher_project_ignore_files', 'converter_relative_word', 'matcher_fuzzy'])
 
 " Add syntax highlighting
 let g:unite_source_line_enable_highlight=1
@@ -256,12 +302,14 @@ function! s:unite_settings()
 endfunction
 " Search files recursively ([o]pen file)
  nnoremap <silent> <leader>o  :execute 'Unite -buffer-name=file-recursive-search -start-insert file_rec/neovim'<CR>
+" Search files recursively ([O]pen file)
+ nnoremap <silent> <leader>O  :execute 'Unite -buffer-name=file-recursive-search -start-insert file_rec/async'<CR>
 " " Browse [f]iles in CWD
  nnoremap <silent> <leader>f :execute 'Unite -buffer-name=project-files -start-insert file'<CR>
 " " [U]nite sources
 " nnoremap <silent> <leader>u :call utils#uniteSources()<CR>
 " " Search between open files - buffers
- nnoremap <silent> <leader>k :execute 'Unite -buffer-name=buffers -start-insert buffer'<CR>
+ nnoremap <silent> <leader>l :execute 'Unite -buffer-name=buffers -start-insert buffer'<CR>
 " " Search in current file ou[t]line (tags in current file)
 " nnoremap <silent> <leader>t :call utils#uniteTags()<CR>
 " " Search in lines on current buffer
@@ -274,6 +322,8 @@ endfunction
  nnoremap <silent> <leader>w :execute 'Unite -buffer-name=splits window'<CR>
 " " Search in latest [j]ump positions
  nnoremap <silent> <leader>j :execute 'Unite -buffer-name=jumps -start-insert jump'<CR>
+" " Search in hoogle for haskell [t]ype signatures
+ nnoremap <silent> <leader>t :execute 'Unite -buffer-name=haskell-types -start-insert haskellimport'<CR>
 " " Search in file for text with [g]rep
  nnoremap <silent> <C-p> :execute 'Unite -buffer-name=grep -start-insert grep'<CR>
 " " Search in my custom unite [m]enu with my commands
@@ -282,8 +332,9 @@ endfunction
  nnoremap <silent> <leader>hc :execute 'Unite -buffer-name=commands -start-insert command'<CR>
 " " Seach in help menu for mappings
  nnoremap <silent> <leader>hm :execute 'Unite -buffer-name=mappings -start-insert mapping'<CR>
+" " Search for pattern in open buffers
+ nnoremap <silent><leader>a :execute 'Unite -buffer-name=grep_all_buffers  -start-insert grep:$buffers::'<CR>
 "}}}
-
 
 
 " -----------------------------------------------------
